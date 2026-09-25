@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cervecería Rodríguez — Caballito</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --fondo:#1B1208;
+    --fondo2:#241708;
+    --crema:#EFE6D3;
+    --cobre:#BE6A2E;
+    --dorado:#E4A73B;
+    --lupulo:#6B7B3F;
+    --linea: rgba(239,230,211,0.16);
+    font-family:'Public Sans', system-ui, sans-serif;
+    box-sizing:border-box;
+    padding-top: env(safe-area-inset-top,0px);
+    padding-bottom: env(safe-area-inset-bottom,0px);
+  }
+  @media (prefers-color-scheme: light){
+    :root:not([data-theme="dark"]){ }
+  }
+  *{box-sizing:inherit;}
+  html{scroll-padding-top:env(safe-area-inset-top,0px); scroll-behavior:smooth;}
+  body{margin:0; background:var(--fondo); color:var(--crema); background-image:radial-gradient(circle at 15% 0%, var(--fondo2), var(--fondo) 55%);}
+  img{max-width:100%;}
+  .wrap{max-width:920px; margin:0 auto; padding:0 24px;}
+  h1,h2,h3{font-family:'Fraunces', serif; font-weight:600; margin:0; line-height:1.05;}
+  a{color:inherit;}
+  .overflow-x{overflow-x:auto;}
+
+  header{position:sticky; top:env(safe-area-inset-top,0px); z-index:10; backdrop-filter:blur(6px); background:rgba(27,18,8,0.82); border-bottom:1px solid var(--linea);}
+  nav.wrap{display:flex; align-items:center; justify-content:space-between; padding:16px 24px;}
+  .brand{font-family:'Fraunces', serif; font-weight:700; font-size:1.15rem; letter-spacing:0.01em; text-decoration:none;}
+  .brand em{font-style:italic; color:var(--dorado); font-weight:500;}
+  .navlinks{display:flex; gap:22px; font-size:0.92rem;}
+  .navlinks a{text-decoration:none; opacity:0.82; border-bottom:1px solid transparent; padding-bottom:2px;}
+  .navlinks a:hover{opacity:1; border-color:var(--cobre);}
+
+  .hero{padding:88px 0 64px; position:relative;}
+  .hero .kicker{color:var(--dorado); font-size:1rem; margin-bottom:14px;}
+  .hero h1{font-size:clamp(2.6rem, 7vw, 5rem); max-width:11ch;}
+  .hero p.lead{max-width:46ch; font-size:1.15rem; margin-top:22px; opacity:0.86; line-height:1.55;}
+  .hero .cta-row{margin-top:34px; display:flex; gap:16px; flex-wrap:wrap;}
+  .btn{display:inline-block; padding:13px 26px; border-radius:2px; text-decoration:none; font-size:0.95rem; font-weight:600;}
+  .btn-primary{background:var(--cobre); color:#1B1208;}
+  .btn-ghost{border:1px solid var(--linea); color:var(--crema);}
+  .btn:hover{filter:brightness(1.12);}
+
+  section{padding:64px 0; border-top:1px solid var(--linea);}
+  .section-head{display:flex; align-items:baseline; justify-content:space-between; gap:16px; margin-bottom:36px; flex-wrap:wrap;}
+  .section-head h2{font-size:clamp(1.7rem,4vw,2.3rem);}
+  .section-head .n{color:var(--dorado); font-family:'Fraunces',serif; font-style:italic; font-size:1.05rem;}
+
+  .cervezas{display:grid; grid-template-columns:1fr; gap:0;}
+  .cerveza{display:grid; grid-template-columns:1fr auto; gap:6px 20px; padding:20px 0; border-bottom:1px solid var(--linea); align-items:baseline;}
+  .cerveza:first-child{padding-top:0;}
+  .cerveza h3{font-size:1.25rem; font-weight:600;}
+  .cerveza .abv{color:var(--dorado); font-family:'Fraunces',serif; font-style:italic; white-space:nowrap;}
+  .cerveza p{grid-column:1/-1; margin:0; opacity:0.78; max-width:62ch; line-height:1.55;}
+
+  .about{display:grid; grid-template-columns:1.1fr 0.9fr; gap:48px; align-items:start;}
+  .about p{line-height:1.7; opacity:0.86; margin:0 0 16px;}
+  .about-figure{border:1px solid var(--linea); padding:28px; background:var(--fondo2);}
+  .about-figure .num{font-family:'Fraunces',serif; font-size:2.6rem; color:var(--dorado); display:block;}
+  .about-figure .lbl{font-size:0.88rem; opacity:0.7; display:block; margin-top:4px;}
+  .about-figure .fact + .fact{margin-top:22px; padding-top:22px; border-top:1px solid var(--linea);}
+
+  .ubicacion{display:grid; grid-template-columns:1fr 1fr; gap:40px;}
+  .direccion dt{font-size:0.82rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--dorado); margin-top:20px;}
+  .direccion dt:first-child{margin-top:0;}
+  .direccion dd{margin:6px 0 0; font-size:1.05rem; line-height:1.5;}
+  .mapa{border:1px solid var(--linea); background:
+      linear-gradient(var(--linea) 1px, transparent 1px) 0 0/100% 34px,
+      linear-gradient(90deg, var(--linea) 1px, transparent 1px) 0 0/34px 100%,
+      var(--fondo2);
+      min-height:240px; position:relative; display:flex; align-items:flex-end; padding:18px;}
+  .mapa .pin{position:absolute; top:44%; left:52%; width:14px; height:14px; background:var(--cobre); border-radius:50% 50% 50% 0; transform:rotate(-45deg) translate(-50%,-50%);}
+  .mapa .cap{font-size:0.85rem; opacity:0.75;}
+
+  footer{border-top:1px solid var(--linea); padding:40px 0 48px;}
+  footer .wrap{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;}
+  footer .foot-brand{font-family:'Fraunces',serif; font-size:1.05rem;}
+  footer .foot-links{display:flex; gap:20px; font-size:0.9rem; opacity:0.8;}
+  footer .foot-links a{text-decoration:none;}
+
+  @media (max-width:720px){
+    .about, .ubicacion{grid-template-columns:1fr;}
+    .navlinks{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a class="brand" href="#top">Rodríguez <em>Cervecería</em></a>
+    <div class="navlinks">
+      <a href="#cervezas">Cervezas</a>
+      <a href="#cocina">Cocina</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#caballito">Caballito</a>
+    </div>
+  </nav>
+</header>
+
+<div id="top" class="hero wrap">
+  <p class="kicker">Bar de cervezas y cocina — Caballito, Buenos Aires</p>
+  <h1>Doce canillas y una mesa siempre lista.</h1>
+  <p class="lead">Rodríguez es el bar de cerveza del barrio: doce canillas que rotan con estilos nacionales e importados, y una cocina que acompaña en serio, no de relleno. Venimos abriendo la persiana en Caballito desde hace años.</p>
+  <div class="cta-row">
+    <a class="btn btn-primary" href="#cervezas">Ver la carta de canillas</a>
+    <a class="btn btn-ghost" href="#caballito">Cómo llegar</a>
+  </div>
+</div>
+
+<section id="cervezas">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>En canilla esta semana</h2>
+      <span class="n">doce líneas</span>
+    </div>
+    <div class="cervezas">
+      <div class="cerveza">
+        <h3>Golden Ale — Cerveza del Barrio</h3>
+        <span class="abv">4.8% vol.</span>
+        <p>Liviana, maltas Pilsen y un toque de miel. La que pedís sin pensar cuando hace calor.</p>
+      </div>
+      <div class="cerveza">
+        <h3>IPA — Antares</h3>
+        <span class="abv">6.3% vol.</span>
+        <p>Lupulada con Citra y Mosaic. Amargor firme, aroma a pomelo y pino.</p>
+      </div>
+      <div class="cerveza">
+        <h3>Scotch Ale — Berlina</h3>
+        <span class="abv">7.5% vol.</span>
+        <p>Espesa, notas a caramelo quemado y pasas. Ideal para el otoño porteño.</p>
+      </div>
+      <div class="cerveza">
+        <h3>Stout — Buller</h3>
+        <span class="abv">5.9% vol.</span>
+        <p>Negra cremosa con café y cacao tostado. Se sirve fría pero se toma despacio.</p>
+      </div>
+      <div class="cerveza">
+        <h3>Saison — importada belga</h3>
+        <span class="abv">5.4% vol.</span>
+        <p>Fermentación belga, seca y especiada, con un cierre a pimienta blanca.</p>
+      </div>
+      <div class="cerveza">
+        <h3>Red Ale — la de la casa</h3>
+        <span class="abv">5.6% vol.</span>
+        <p>Irish red ale, cuerpo medio y final a caramelo tostado. La favorita de los habitués.</p>
+      </div>
+    </div>
+    <p style="margin-top:22px; opacity:0.65; font-size:0.9rem;">La carta completa (doce canillas) cambia semana a semana según lo que traigamos de cervecerías amigas. Consultá la pizarra del día.</p>
+  </div>
+</section>
+
+<section id="cocina">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>De la cocina</h2>
+      <span class="n">para acompañar</span>
+    </div>
+    <div class="cervezas">
+      <div class="cerveza">
+        <h3>Tabla de picada Rodríguez</h3>
+        <span class="abv">$ 12.900</span>
+        <p>Fiambres, quesos, encurtidos y pan casero. Para compartir en la mesa.</p>
+      </div>
+      <div class="cerveza">
+        <h3>Bondiola al malbec</h3>
+        <span class="abv">$ 9.800</span>
+        <p>Cocción lenta con puré rústico. El plato que más repite la barra.</p>
+      </div>
+      <div class="cerveza">
+        <h3>Milanesa a la cerveza negra</h3>
+        <span class="abv">$ 8.500</span>
+        <p>Rebozada con stout en la mezcla, papas al horno.</p>
+      </div>
+      <div class="cerveza">
+        <h3>Nachos Caballito</h3>
+        <span class="abv">$ 6.400</span>
+        <p>Cheddar, panceta ahumada, guacamole y jalapeños.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="nosotros">
+  <div class="wrap about">
+    <div>
+      <h2 style="margin-bottom:20px;">Un bar, no una cadena</h2>
+      <p>Abrimos hace años en Caballito con una idea simple: un lugar de barrio donde la cerveza se sirve con la temperatura y el vaso que corresponde, y la cocina no es un trámite. Elegimos cada línea de canilla a mano, catando antes de comprarla.</p>
+      <p>No perseguimos tendencias. Cada cerveza se queda en la carta el tiempo que tiene que quedarse, y si sale una nueva es porque tenemos algo para contar con ella.</p>
+    </div>
+    <div class="about-figure">
+      <div class="fact">
+        <span class="num">12</span>
+        <span class="lbl">canillas rotando por temporada</span>
+      </div>
+      <div class="fact">
+        <span class="num">35</span>
+        <span class="lbl">etiquetas en botella para llevar</span>
+      </div>
+      <div class="fact">
+        <span class="num">1</span>
+        <span class="lbl">barra, sin sucursales</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="caballito">
+  <div class="wrap ubicacion">
+    <div>
+      <h2 style="margin-bottom:20px;">Nos encontrás en Caballito</h2>
+      <dl class="direccion">
+        <dt>Dirección</dt>
+        <dd>Av. Rivadavia 5200 (esquina Yerbal), Caballito, CABA</dd>
+        <dt>Horario</dt>
+        <dd>Martes a domingo, de 18 a 1&nbsp;h. Lunes cerrado.</dd>
+        <dt>Cómo llegar</dt>
+        <dd>A dos cuadras de la estación Primera Junta (línea A) y sobre el recorrido de varios colectivos por Rivadavia.</dd>
+        <dt>Contacto</dt>
+        <dd>011 4444-5678 · <a href="mailto:hola@cerveceriarodriguez.com.ar">hola@cerveceriarodriguez.com.ar</a></dd>
+      </dl>
+    </div>
+    <div class="mapa">
+      <div class="pin"></div>
+      <span class="cap">Av. Rivadavia y Yerbal — a metros de la Plaza Primera Junta</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span class="foot-brand">Cervecería Rodríguez</span>
+    <div class="foot-links">
+      <a href="mailto:hola@cerveceriarodriguez.com.ar">Email</a>
+      <a href="#" onclick="return false;">Instagram</a>
+      <a href="#top">Volver arriba</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
